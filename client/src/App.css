@@ -1,0 +1,142 @@
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  align-items: center;
+}
+
+.title {
+  font-size: 36px;
+}
+
+.information {
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  font-size: 25px;
+  margin: 10px 0;
+}
+
+.inc {
+  position: relative;
+}
+.inc::before {
+  position: absolute;
+  content: "";
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background-color: green;
+  left: -60px;
+  top: -5px;
+}
+
+.dec {
+  position: relative;
+}
+.dec::before {
+  position: absolute;
+  content: "";
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background-color: red;
+  left: -60px;
+  top: -5px;
+}
+
+.tickers-body {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  margin: 20px 30px;
+  border: 2px solid #000000;
+  font-size: 24px;
+}
+
+.ticker {
+  display: flex;
+  width: 100%;
+  height: 70px;
+}
+.ticker:not(:last-child) {
+  border-bottom: 2px solid #000000;
+}
+.ticker:first-child {
+  font-weight: bold;
+}
+
+.cell {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.cell:not(:last-child) {
+  border-right: 1px solid #000000;
+}
+
+.on-off button {
+    font-size: 20px;
+    padding: 10px 20px;
+}
+
+@media screen and (max-width: 900px) {
+  .tickers-body {
+    flex-direction: row;
+    font-size: 18px;
+  }
+  .ticker {
+    display: block;
+  }
+  .ticker {
+    height: 100%;
+  }
+  .ticker:not(:last-child) {
+    border-bottom: none;
+  }
+  .cell {
+    height: 70px;
+  }
+  .cell:not(:last-child) {
+    border-bottom: 1px solid #000000;
+    border-right: none;
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .information {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .inc {
+    margin: 10px 0;
+  }
+  .dec {
+    margin: 10px 0;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .tickers-body {
+    font-size: 13px;
+  }
+  .information {
+    font-size: 18px;
+  }
+  .inc::before {
+    width: 30px;
+    height: 30px;
+    left: -40px;
+    top: -3px;
+  }
+  .dec::before {
+    width: 30px;
+    height: 30px;
+    left: -40px;
+    top: -3px;
+  }
+}
