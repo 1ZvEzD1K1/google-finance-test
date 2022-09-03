@@ -74,6 +74,10 @@
   justify-content: center;
   align-items: center;
 }
+.cell input[type="checkbox"] {
+height: 30px;
+width: 30px;
+}
 .cell:not(:last-child) {
   border-right: 1px solid #000000;
 }

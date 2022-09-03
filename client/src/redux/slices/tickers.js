@@ -13,16 +13,29 @@ const tickersSlice = createSlice({
             state.prevTickers = state.tickers
             if (state.prevTickers.length) {
                 state.tickers = action.payload.map((el, id) => {
-                    return {...el, bg: el.price > state.prevTickers[id].price ? "green" : "red"}
+                    if (state.tickers[id].lock) {
+                        return state.tickers[id]
+                    } else {
+                        return { ...el, bg: el.price > state.prevTickers[id].price ? "green" : "red", lock: false }
+                    }
                 })
             } else {
-                state.tickers = action.payload.map((el, id) => {
-                    return {...el, bg: "green"}
+                state.tickers = action.payload.map((el) => {
+                    return { ...el, bg: "green", lock: false }
                 })
             }
+        },
+        lockTickers: (state, action) => {
+            state.tickers = state.tickers.map((el) => {
+                if (el.ticker == action.payload) {
+                    return { ...el, lock: !el.lock }
+                } else {
+                    return el
+                }
+            })
         }
     }
 })
 
 export default tickersSlice.reducer
-export const { updateTickers} = tickersSlice.actions
+export const { updateTickers, lockTickers } = tickersSlice.actions

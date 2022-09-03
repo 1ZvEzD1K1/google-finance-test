@@ -3,7 +3,7 @@ import {io} from 'socket.io-client'
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux'
 import './App.css';
-import { updatePrevTickers, updateTickers } from './redux/slices/tickers';
+import { updateTickers } from './redux/slices/tickers';
 
 
 const socket = io('http://localhost:4000', {
@@ -11,7 +11,7 @@ const socket = io('http://localhost:4000', {
 })
 
 function App() {
-  const [onoff, setOnoff] = useState(null)
+  const [isActive, setIsActive] = useState(null)
   const tickers = useSelector(store=>store.tickers)
   const dispatch = useDispatch()
 
@@ -27,7 +27,7 @@ function App() {
     socket.on('ticker', function(response) {
       dispatch(updateTickers(response))
     });
-    setOnoff(false)
+    setIsActive(false)
 
     return () => {
       socket.close()
@@ -36,14 +36,14 @@ function App() {
   }, [])
 
   const onoftickers = () => {
-    if (!onoff) {
+    if (!isActive) {
       socket.off('ticker');
-      setOnoff(true)
+      setIsActive(true)
     } else {
       socket.on('ticker', function(response) {
         dispatch(updateTickers(response))
       });
-      setOnoff(false)
+      setIsActive(false)
     }
   }
 
@@ -57,7 +57,7 @@ function App() {
       <Tickers tickers={tickers.tickers} />
       <div className='on-off'>
         <button onClick={onoftickers}>
-          {onoff ? ('on tickers') : ('off tickers') }
+          {isActive ? 'on tickers' : 'off tickers' }
         </button>
       </div>
     </div>
